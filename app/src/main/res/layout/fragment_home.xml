@@ -23,7 +23,8 @@
         android:text="SSE"
         android:textSize="10sp"
         android:textColor="@color/accent_green"
-        android:padding="2dp 8dp"
+        android:paddingVertical="2dp"
+        android:paddingHorizontal="8dp"
         android:layout_marginTop="2dp"
         android:layout_gravity="end" />
 
