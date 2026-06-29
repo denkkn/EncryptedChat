@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:gravity="center" android:padding="32dp">
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="加密聊天" android:textSize="28sp" android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="导入已有私钥 或 创建新账户" android:textSize="14sp"
+        android:textColor="#888" android:layout_marginBottom="40dp" />
+
+    <Button android:id="@+id/btn_import" android:layout_width="match_parent"
+        android:layout_height="48dp" android:text="导入私钥（恢复账户）"
+        android:layout_marginBottom="16dp" />
+
+    <LinearLayout android:id="@+id/layout_import"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:visibility="gone" android:layout_marginBottom="16dp">
+        <EditText android:id="@+id/et_private_key"
+            android:layout_width="match_parent" android:layout_height="150dp"
+            android:hint="粘贴私钥 PEM 内容..." android:gravity="top"
+            android:inputType="textMultiLine" android:background="#111" android:padding="8dp" />
+        <Button android:id="@+id/btn_do_import" android:layout_width="match_parent"
+            android:layout_height="40dp" android:text="确认导入" android:layout_marginTop="8dp" />
+    </LinearLayout>
+
+    <Button android:id="@+id/btn_create" android:layout_width="match_parent"
+        android:layout_height="48dp" android:text="创建新账户" style="?android:attr/buttonBarButtonStyle" />
+</LinearLayout>

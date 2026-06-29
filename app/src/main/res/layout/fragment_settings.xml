@@ -1,97 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background_dark"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
     android:padding="16dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- 我的UID -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/my_info"
-            android:textSize="18sp"
-            android:textColor="@color/accent"
-            android:textStyle="bold"
+        <!-- 主题 -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="主题" android:textSize="18sp" android:textStyle="bold"
             android:layout_marginBottom="8dp" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center" android:layout_marginBottom="16dp">
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:text="深色模式" android:textSize="15sp" />
+            <Switch android:id="@+id/switch_dark" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/my_uid"
-            android:textSize="14sp"
-            android:textColor="@color/text_secondary" />
-
-        <TextView
-            android:id="@+id/tv_my_uid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/loading"
-            android:textSize="14sp"
-            android:textColor="@color/text_primary"
-            android:fontFamily="monospace"
-            android:background="@color/input_background"
-            android:padding="8dp"
-            android:layout_marginBottom="16dp"
+        <!-- 我的信息 -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="我的信息" android:textSize="18sp" android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="UID" android:textSize="12sp" android:textColor="#888" />
+        <TextView android:id="@+id/tv_my_uid" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:textSize="13sp"
+            android:fontFamily="monospace" android:padding="8dp" android:layout_marginBottom="8dp"
             android:textIsSelectable="true" />
-
-        <!-- 我的公钥 -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/my_public_key"
-            android:textSize="14sp"
-            android:textColor="@color/text_secondary" />
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:background="@color/input_background"
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="公钥 (Base64)" android:textSize="12sp" android:textColor="#888" />
+        <ScrollView android:layout_width="match_parent" android:layout_height="100dp"
             android:layout_marginBottom="8dp">
-
-            <TextView
-                android:id="@+id/tv_my_pub_key"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/loading"
-                android:textSize="11sp"
-                android:textColor="@color/text_primary"
-                android:fontFamily="monospace"
-                android:padding="8dp"
-                android:textIsSelectable="true" />
+            <TextView android:id="@+id/tv_my_pub_key" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:textSize="11sp"
+                android:fontFamily="monospace" android:padding="8dp" android:textIsSelectable="true" />
         </ScrollView>
+        <Button android:id="@+id/btn_copy_pub_key" android:layout_width="match_parent"
+            android:layout_height="44dp" android:text="复制公钥（给别人加我）" android:layout_marginBottom="16dp" />
 
-        <Button
-            android:id="@+id/btn_copy_pub_key"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="@string/copy_public_key"
-            android:backgroundTint="@color/btn_background"
-            android:textColor="@color/text_primary"
-            android:layout_marginBottom="24dp" />
-
-        <!-- 重新生成密钥 -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="危险操作"
-            android:textSize="18sp"
-            android:textColor="@color/accent_red"
-            android:textStyle="bold"
+        <!-- 账户管理 -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="账户管理" android:textSize="18sp" android:textStyle="bold"
             android:layout_marginBottom="8dp" />
-
-        <Button
-            android:id="@+id/btn_regenerate"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="@string/regenerate_keys"
-            android:backgroundTint="@color/accent_red"
-            android:textColor="@color/text_primary" />
+        <Button android:id="@+id/btn_export_priv" android:layout_width="match_parent"
+            android:layout_height="44dp" android:text="导出私钥（备份）" android:layout_marginBottom="8dp" />
+        <Button android:id="@+id/btn_import_account" android:layout_width="match_parent"
+            android:layout_height="44dp" android:text="导入私钥（恢复账户）" />
     </LinearLayout>
 </ScrollView>

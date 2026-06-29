@@ -4,19 +4,18 @@ import android.app.AlertDialog
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
-import com.example.encryptedchat.R
 import com.example.encryptedchat.crypto.KeyManager
 import com.example.encryptedchat.databinding.FragmentSettingsBinding
 
-/** 设置 — 密钥管理与分享 */
 class SettingsFragment : Fragment() {
-
     private var _b: FragmentSettingsBinding? = null
     private val b get() = _b!!
 
@@ -25,42 +24,39 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(v: View, s: Bundle?) {
         super.onViewCreated(v, s)
-        refresh()
+        val app = requireActivity().application as ChatApp
+        refresh(app)
+
         b.btnCopyPubKey.setOnClickListener {
-            val pub = b.tvMyPubKey.text.toString()
-            if (pub.isNotEmpty() && !pub.startsWith("请")) {
-                (requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager)
-                    .setPrimaryClip(ClipData.newPlainText("公钥Base64", pub))
-                toast("已复制!")
-            }
+            (requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager)
+                .setPrimaryClip(ClipData.newPlainText("公钥", b.tvMyPubKey.text.toString()))
+            toast("已复制公钥")
         }
-        b.btnRegenerate.setOnClickListener {
-            AlertDialog.Builder(requireContext()).setTitle("重新生成密钥对")
-                .setMessage(R.string.confirm_regenerate)
-                .setPositiveButton("确定") { _, _ -> regenerate() }
-                .setNegativeButton("取消") { d, _ -> d.dismiss() }.show()
+        b.btnExportPriv.setOnClickListener {
+            val pem = app.keyManager.exportPrivateKeyPem()
+            (requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager)
+                .setPrimaryClip(ClipData.newPlainText("私钥", pem))
+            toast("私钥已复制到剪贴板！请妥善保管")
         }
-    }
-
-    private fun refresh() {
-        try {
-            val app = requireActivity().application as ChatApp
-            b.tvMyUid.text = app.cryptoManager.getMyUid()
-            b.tvMyPubKey.text = app.cryptoManager.getMyPubBase64()
-        } catch (e: Exception) {
-            b.tvMyUid.text = "加载失败: ${e.message}"
+        b.btnImportAccount.setOnClickListener {
+            startActivity(Intent(requireContext(), AccountSetupActivity::class.java))
+        }
+        b.switchDark.setOnCheckedChangeListener { _, isChecked ->
+            val ctx = requireContext().applicationContext
+            ThemeManager.setDark(ctx, isChecked)
+            AppCompatDelegate.setDefaultNightMode(
+                if (isChecked) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+            )
         }
     }
 
-    private fun regenerate() {
-        try {
-            val (uid, pub) = KeyManager(requireContext()).generateKeyPair()
-            b.tvMyUid.text = uid; b.tvMyPubKey.text = pub
-            toast("密钥已重新生成!")
-        } catch (e: Exception) { toast("生成失败: ${e.message}") }
+    private fun refresh(app: ChatApp) {
+        b.tvMyUid.text = app.keyManager.getMyUid()
+        b.tvMyPubKey.text = app.keyManager.getMyPublicKeyBase64()
+        b.switchDark.isChecked = ThemeManager.isDark(requireContext())
     }
 
     private fun toast(s: String) { Toast.makeText(requireContext(), s, Toast.LENGTH_SHORT).show() }
-
+    override fun onResume() { super.onResume(); refresh(requireActivity().application as ChatApp) }
     override fun onDestroyView() { super.onDestroyView(); _b = null }
 }

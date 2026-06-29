@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:gravity="end" android:padding="4dp">
+
+    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:orientation="vertical" android:maxWidth="280dp" android:gravity="end"
+        android:background="#2B5278" android:padding="8dp" android:layout_marginStart="60dp">
+
+        <TextView android:id="@+id/tv_content" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:textColor="#fff" android:textSize="14sp" />
+
+        <ImageView android:id="@+id/img_preview" android:layout_width="200dp"
+            android:layout_height="200dp" android:scaleType="centerCrop"
+            android:visibility="gone" android:layout_marginTop="4dp" />
+
+        <LinearLayout android:id="@+id/ll_file" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:orientation="horizontal"
+            android:visibility="gone" android:gravity="center" android:layout_marginTop="4dp">
+            <TextView android:text="📄" android:textSize="28sp" android:layout_marginEnd="8dp" />
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:orientation="vertical">
+                <TextView android:id="@+id/tv_filename" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:textColor="#fff" android:textSize="13sp" />
+                <TextView android:id="@+id/tv_filesize" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:textColor="#aaa" android:textSize="11sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/ll_audio" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:orientation="horizontal"
+            android:visibility="gone" android:gravity="center" android:layout_marginTop="4dp">
+            <TextView android:text="🎵" android:textSize="20sp" android:layout_marginEnd="4dp" />
+            <TextView android:id="@+id/tv_audio_dur" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:textColor="#fff" android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:layout_marginTop="4dp" android:gravity="end">
+            <TextView android:id="@+id/tv_time" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:textColor="#8af" android:textSize="10sp" />
+            <ProgressBar android:id="@+id/progress_send" android:layout_width="14dp"
+                android:layout_height="14dp" android:visibility="gone" android:layout_marginStart="4dp" />
+            <ImageView android:id="@+id/iv_status" android:layout_width="14dp"
+                android:layout_height="14dp" android:visibility="gone" android:layout_marginStart="4dp" />
+            <Button android:id="@+id/btn_retry" android:layout_width="18dp"
+                android:layout_height="18dp" android:text="!" android:textSize="10sp"
+                android:visibility="gone" android:layout_marginStart="4dp"
+                android:backgroundTint="#f44" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
