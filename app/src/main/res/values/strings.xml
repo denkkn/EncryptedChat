@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">加密聊天</string>
+    <string name="tab_home">首页</string>
+    <string name="tab_contacts">联系人</string>
+    <string name="tab_settings">设置</string>
+    <string name="select_friend">选择好友…</string>
+    <string name="input_message">输入消息…</string>
+    <string name="send">发送</string>
+    <string name="send_file">文件</string>
+    <string name="pull_messages">拉取消息</string>
+    <string name="start_polling">轮询(3秒)</string>
+    <string name="stop_polling">停止</string>
+    <string name="no_messages">暂无消息</string>
+    <string name="my_info">我的信息</string>
+    <string name="my_uid">我的UID</string>
+    <string name="my_public_key">我的公钥 (Base64)</string>
+    <string name="copy_public_key">复制公钥</string>
+    <string name="regenerate_keys">重新生成密钥对</string>
+    <string name="add_friend">添加好友</string>
+    <string name="friend_name">好友备注</string>
+    <string name="friend_pub_key">好友公钥 (Base64)</string>
+    <string name="friend_name_hint">请输入好友备注</string>
+    <string name="friend_pub_hint">粘贴好友的公钥Base64</string>
+    <string name="save">保存</string>
+    <string name="cancel">取消</string>
+    <string name="delete_friend">删除好友</string>
+    <string name="confirm_delete_friend">确定要删除该好友吗？</string>
+    <string name="confirm_regenerate">重新生成密钥对后，你的UID会改变，旧消息将无法解密。确定要继续吗？</string>
+    <string name="copied">已复制!</string>
+    <string name="sending">发送中…</string>
+    <string name="downloading">下载中…</string>
+    <string name="loading">加载中…</string>
+    <string name="error_network">网络错误</string>
+    <string name="error_no_friend_selected">请先选择好友</string>
+    <string name="error_empty_message">请输入消息</string>
+    <string name="error_no_file_selected">请选择文件</string>
+    <string name="msg_sent">发送成功</string>
+</resources>

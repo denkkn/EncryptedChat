@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- 允许对服务器IP的明文HTTP请求 -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">47.113.126.123</domain>
+    </domain-config>
+</network-security-config>
