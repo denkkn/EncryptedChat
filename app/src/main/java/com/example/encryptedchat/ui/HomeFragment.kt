@@ -145,8 +145,10 @@ class HomeFragment : Fragment() {
     private fun downloadFile(msg: Message) {
         scope.launch {
             try {
-                val enc = withContext(Dispatchers.IO) { app.apiClient.downloadFile(msg.fileHash) } ?: return@launch toast("下载失败")
-                val aes = android.util.Base64.decode(msg.aesKeyBase64, android.util.Base64.NO_WRAP)
+                val hash = msg.fileHash ?: return@launch toast("下载失败")
+                val keyB64 = msg.aesKeyBase64 ?: return@launch toast("下载失败")
+                val enc = withContext(Dispatchers.IO) { app.apiClient.downloadFile(hash) } ?: return@launch toast("下载失败")
+                val aes = android.util.Base64.decode(keyB64, android.util.Base64.NO_WRAP)
                 val dec = app.cryptoManager.decryptFileData(enc, aes)
                 val out = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), msg.filename ?: "download")
                 withContext(Dispatchers.IO) { out.writeBytes(dec) }
@@ -158,8 +160,10 @@ class HomeFragment : Fragment() {
     private fun loadImage(msg: Message, iv: ImageView) {
         scope.launch {
             try {
-                val enc = withContext(Dispatchers.IO) { app.apiClient.downloadFile(msg.fileHash) } ?: return@launch toast("加载失败")
-                val aes = android.util.Base64.decode(msg.aesKeyBase64, android.util.Base64.NO_WRAP)
+                val hash = msg.fileHash ?: return@launch toast("加载失败")
+                val keyB64 = msg.aesKeyBase64 ?: return@launch toast("加载失败")
+                val enc = withContext(Dispatchers.IO) { app.apiClient.downloadFile(hash) } ?: return@launch toast("加载失败")
+                val aes = android.util.Base64.decode(keyB64, android.util.Base64.NO_WRAP)
                 val bmp = BitmapFactory.decodeByteArray(app.cryptoManager.decryptFileData(enc, aes), 0, (enc.size - 28).coerceAtLeast(0))
                 if (bmp != null) { iv.setImageBitmap(bmp); iv.visibility = View.VISIBLE; iv.setOnClickListener { showFull(bmp) } }
             } catch (e: Exception) { toast("加载失败: ${e.message}") }
