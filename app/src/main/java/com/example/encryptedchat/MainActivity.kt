@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
     @Deprecated("Use registerForActivityResult")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == HomeFragment.REQUEST_FILE_PICK && resultCode == RESULT_OK) {
+        if (requestCode == HomeFragment.REQ_FILE && resultCode == RESULT_OK) {
             data?.data?.let { homeFragment?.handleFileResult(it) }
         }
     }

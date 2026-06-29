@@ -20,15 +20,14 @@ class FriendAdapter(
         LayoutInflater.from(p.context).inflate(R.layout.item_friend, p, false))
 
     override fun onBindViewHolder(h: VH, i: Int) = h.bind(list[i])
-
     override fun getItemCount() = list.size
 
     inner class VH(v: android.view.View) : RecyclerView.ViewHolder(v) {
         fun bind(f: Friend) {
-            v.findViewById<TextView>(R.id.tv_friend_name).text = f.name
-            v.findViewById<TextView>(R.id.tv_friend_uid).text = f.uid.take(32) + "..."
-            v.setOnClickListener { onClick(f) }
-            v.findViewById<android.widget.Button>(R.id.btn_delete_friend).setOnClickListener { onDelete(f) }
+            itemView.findViewById<TextView>(R.id.tv_friend_name).text = f.name
+            itemView.findViewById<TextView>(R.id.tv_friend_uid).text = f.uid.take(32) + "..."
+            itemView.setOnClickListener { onClick(f) }
+            itemView.findViewById<android.widget.Button>(R.id.btn_delete_friend).setOnClickListener { onDelete(f) }
         }
     }
 }

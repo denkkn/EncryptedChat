@@ -152,7 +152,8 @@ class ApiClient(
 
         try {
             val res = sseHttp.newCall(req).execute()
-            val reader = res.body?.charStream()?.bufferedReader() ?: return@withContext
+            val body = res.body ?: return@withContext
+            val reader = java.io.BufferedReader(body.charStream())
             var currentTs = lastTs
 
             reader.use { r ->

@@ -4,6 +4,8 @@ import android.content.Context
 import android.util.Base64
 import java.io.File
 import java.security.*
+import java.security.spec.PKCS8EncodedKeySpec
+import java.security.spec.X509EncodedKeySpec
 
 /**
  * RSA密钥管理 — Python格式完全兼容
