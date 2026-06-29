@@ -104,7 +104,7 @@ class ApiClient(
         for (ts in sortedKeys) try {
             val m = raw.getJSONObject(ts)
             val dm = crypto.decryptReceivedMsg(m.getString("msg"), m.getString("key"))
-            msgs.add(Message(dm.time, dm.type, dm.content, dm.filename, dm.fileHash, dm.size, dm.isImage, dm.aesKeyBase64))
+            msgs.add(Message(time = dm.time, type = dm.type, content = dm.content, filename = dm.filename, fileHash = dm.fileHash, size = dm.size, isImage = dm.isImage, aesKeyBase64 = dm.aesKeyBase64))
         } catch (_: Exception) {}
         return msgs
     }
@@ -166,8 +166,8 @@ class ApiClient(
                             if (evt.optInt("code") == 0) {
                                 val dm = crypto.decryptReceivedMsg(
                                     evt.getString("msg"), evt.getString("key"))
-                                val msg = Message(dm.time, dm.type, dm.content,
-                                    dm.filename, dm.fileHash, dm.size, dm.isImage, dm.aesKeyBase64)
+                                val msg = Message(time = dm.time, type = dm.type, content = dm.content,
+                                    filename = dm.filename, fileHash = dm.fileHash, size = dm.size, isImage = dm.isImage, aesKeyBase64 = dm.aesKeyBase64)
                                 if (msg.time > currentTs) currentTs = msg.time
                                 onMsg(msg)
                             }

@@ -127,7 +127,7 @@ class ChatAdapter(
                 m.isImage -> {
                     content.visibility = View.GONE; audioBox.visibility = View.GONE; fileBox.visibility = View.GONE
                     imgPreview.visibility = View.VISIBLE; btnDown.visibility = View.VISIBLE; downProgress.visibility = View.GONE
-                    val f = File(v.context.getExternalFilesDir("downloads"), m.fileHash ?: "")
+                    val f = File(itemView.context.getExternalFilesDir("downloads"), m.fileHash ?: "")
                     if (f.exists()) {
                         imgPreview.setImageBitmap(BitmapFactory.decodeFile(f.absolutePath))
                         btnDown.visibility = View.GONE
@@ -139,9 +139,9 @@ class ChatAdapter(
                 !m.filename.isNullOrEmpty() -> {
                     content.visibility = View.GONE; imgPreview.visibility = View.GONE; audioBox.visibility = View.GONE
                     fileBox.visibility = View.VISIBLE; fileName.text = m.filename; fileSize.text = fmtSize(m.size ?: 0)
-                    val f = File(v.context.getExternalFilesDir("downloads"), m.fileHash ?: "")
+                    val f = File(itemView.context.getExternalFilesDir("downloads"), m.fileHash ?: "")
                     if (f.exists()) {
-                        btnDown.text = "打开"; btnDown.setOnClickListener { openFile(v.context, f, m.filename ?: "") }
+                        btnDown.text = "打开"; btnDown.setOnClickListener { openFile(itemView.context, f, m.filename ?: "") }
                     } else {
                         btnDown.text = "下载"; btnDown.setOnClickListener { btnDown.visibility = View.GONE; downProgress.visibility = View.VISIBLE; onDownload(m) }
                     }
