@@ -81,7 +81,7 @@ class CryptoManager(private val keyManager: KeyManager) {
             '"' -> append("\\\"")
             '\\' -> append("\\\\")
             '\b' -> append("\\b")
-            '' -> append("\\f") // Form Feed (U+000C)
+            '\u000c' -> append("\\f")
             '\n' -> append("\\n")
             '\r' -> append("\\r")
             '\t' -> append("\\t")
