@@ -7,10 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.encryptedchat.R
 import com.example.encryptedchat.databinding.FragmentHomeBinding
 import com.example.encryptedchat.ui.adapters.ConversationAdapter
 
-/** 首页 — 会话卡片列表(像QQ/微信)，按最新消息排序 */
+/** 首页 — 会话卡片列表(QQ/微信风格)，FAB跳转联系人发起新会话 */
 class HomeFragment : Fragment() {
 
     private var _b: FragmentHomeBinding? = null
@@ -31,6 +32,14 @@ class HomeFragment : Fragment() {
         }
         b.recyclerConversations.layoutManager = LinearLayoutManager(requireContext())
         b.recyclerConversations.adapter = adapter
+
+        // FAB → 跳转到联系人页
+        b.fabNewChat.setOnClickListener {
+            (requireActivity() as com.example.encryptedchat.MainActivity).let { act ->
+                act.findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(
+                    R.id.bottom_nav)?.selectedItemId = R.id.nav_contacts
+            }
+        }
     }
 
     override fun onResume() {

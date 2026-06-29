@@ -9,6 +9,7 @@ import com.example.encryptedchat.model.Friend
 
 class FriendAdapter(
     private val onClick: (Friend) -> Unit,
+    private val onLongClick: (Friend) -> Unit,
     private val onDelete: (Friend) -> Unit
 ) : RecyclerView.Adapter<FriendAdapter.VH>() {
 
@@ -27,6 +28,7 @@ class FriendAdapter(
             itemView.findViewById<TextView>(R.id.tv_friend_name).text = f.name
             itemView.findViewById<TextView>(R.id.tv_friend_uid).text = f.uid.take(32) + "..."
             itemView.setOnClickListener { onClick(f) }
+            itemView.setOnLongClickListener { onLongClick(f); true }
             itemView.findViewById<android.widget.Button>(R.id.btn_delete_friend).setOnClickListener { onDelete(f) }
         }
     }

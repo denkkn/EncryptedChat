@@ -1,6 +1,7 @@
 package com.example.encryptedchat.ui
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,7 +29,15 @@ class ContactsFragment : Fragment() {
     override fun onViewCreated(v: View, s: Bundle?) {
         super.onViewCreated(v, s)
         app = requireActivity().application as ChatApp
-        adapter = FriendAdapter(onClick = { renameDialog(it) }, onDelete = { confirmDelete(it) })
+        adapter = FriendAdapter(
+            onClick = { f -> // 点击→进入聊天
+                startActivity(Intent(requireContext(), ChatActivity::class.java).apply {
+                    putExtra("uid", f.uid); putExtra("name", f.name)
+                })
+            },
+            onLongClick = { f -> renameDialog(f) }, // 长按→改备注
+            onDelete = { f -> confirmDelete(f) }
+        )
         b.recyclerFriends.layoutManager = LinearLayoutManager(requireContext())
         b.recyclerFriends.adapter = adapter
         b.fabAddFriend.setOnClickListener { addDialog() }
@@ -57,15 +66,10 @@ class ContactsFragment : Fragment() {
 
     private fun renameDialog(f: Friend) {
         val input = EditText(requireContext()).apply { setText(f.name) }
-        AlertDialog.Builder(requireContext()).setTitle("修改备注")
-            .setView(input)
+        AlertDialog.Builder(requireContext()).setTitle("修改备注").setView(input)
             .setPositiveButton("保存") { _, _ ->
-                val newName = input.text.toString().trim()
-                if (newName.isNotEmpty()) {
-                    app.friendsManager.addFriend(newName, f.pubBase64)
-                    if (newName != f.name) app.friendsManager.deleteFriend(f.name)
-                    load(); toast("已更新")
-                }
+                val n = input.text.toString().trim()
+                if (n.isNotEmpty()) { app.friendsManager.addFriend(n, f.pubBase64); if (n != f.name) app.friendsManager.deleteFriend(f.name); load(); toast("已更新") }
             }
             .setNegativeButton("取消") { d, _ -> d.dismiss() }.show()
     }
