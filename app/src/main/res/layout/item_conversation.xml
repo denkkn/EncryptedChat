@@ -23,6 +23,6 @@
 
     <TextView android:id="@+id/tv_unread" android:layout_width="wrap_content"
         android:layout_height="wrap_content" android:textSize="11sp"
-        android:background="#f44" android:textColor="#fff" android:padding="4dp 8dp"
-        android:visibility="gone" />
+        android:background="#f44" android:textColor="#fff" android:paddingVertical="4dp"
+        android:paddingHorizontal="8dp" android:visibility="gone" />
 </LinearLayout>
